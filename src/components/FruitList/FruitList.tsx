@@ -165,9 +165,8 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
                               ) : null}
                               <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
                                 <div className="text-base font-bold text-gray-900 dark:text-white">
-                                  {fruit.name}
+                                  {fruit.name}: {fruit.nutritions.calories}
                                 </div>
-                                <div>Calories:{fruit.nutritions.calories}</div>
                               </div>
                             </div>
 
