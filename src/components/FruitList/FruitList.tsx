@@ -12,6 +12,11 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
   const [cart, setCart] = useState<Fruit[]>([]);
   const [activeTab, setActiveTab] = useState<boolean>(true);
+  const [groupByField, setGroupByField] = useState<string>("None");
+  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>(
+    {}
+  );
+  let groupedFruits: Record<string, Fruit[]> | null = null;
 
   const addToCart = (fruit: Fruit) => {
     setCart((prevCart) => [...prevCart, fruit]);
@@ -83,11 +88,6 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
     ],
   };
 
-  const [groupByField, setGroupByField] = useState<string>("None");
-  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>(
-    {}
-  );
-
   const handleGroupByChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setGroupByField(event.target.value);
     setExpandedGroups({});
@@ -100,7 +100,6 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
     }));
   };
 
-  let groupedFruits: Record<string, Fruit[]> | null = null;
   if (groupByField !== "None") {
     groupedFruits = groupBy(fruits, groupByField.toLowerCase() as keyof Fruit);
   }
