@@ -1,10 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { initialState, Fruit } from "./fruits.Interface";
-import axios from "axios";
+const APIURL = "https://cors-anywhere.herokuapp.com/https://www.fruityvice.com";
 
 export const fetchFruits = createAsyncThunk("fruits/fetchFruits", async () => {
-  const response = await axios.get<Fruit[]>("/api/fruit/all");
-  return response.data;
+  const response = await fetch(`${APIURL}/api/fruit/all`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch fruits");
+  }
+  const data: Fruit[] = await response.json();
+  return data;
 });
 
 const fruitsSlice = createSlice({

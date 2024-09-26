@@ -3,6 +3,7 @@ import FruitList from "components/FruitList/FruitList";
 import { useAppDispatch, useAppSelector } from "utils/hooks";
 import { fetchFruits } from "features/fruits/fruitsSlice";
 import Hero from "components/Hero/Hero";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const dispatch = useAppDispatch();
@@ -37,7 +38,15 @@ const Dashboard = () => {
       </div>
     );
 
-  if (error) return <p>Error: {error}</p>;
+  if (error)
+    return (
+      <div>
+        If data not visible please visit. Enable CORS by clicking down below{" "}
+        <Link to="https://cors-anywhere.herokuapp.com/https://www.fruityvice.com/api/fruit/all">
+          Click me
+        </Link>
+      </div>
+    );
   return (
     <div>
       <Hero />
