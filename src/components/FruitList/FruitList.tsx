@@ -20,7 +20,7 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
 
   const addToCart = (fruit: Fruit) => {
     setCart((prevCart) => [...prevCart, fruit]);
-    toast.success(`Fruit added to the Jar.`, {
+    toast.success(`${fruit.name} added to the Jar.`, {
       position: "top-center",
       autoClose: 3000,
     });
@@ -33,7 +33,7 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
       newCart.splice(fruitIndex, 1);
       setCart(newCart);
     }
-    toast.success(`Fruit removed from the Jar.`, {
+    toast.success(`${fruitName} removed from the Jar.`, {
       position: "top-center",
       autoClose: 3000,
     });
@@ -151,7 +151,7 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
                     {Array.isArray(fruits) && fruits.length > 0 ? (
                       fruits.map((fruit) => (
                         <div
-                          key={fruit.name}
+                          key={fruit.name + Math.random()}
                           className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6"
                         >
                           <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
@@ -271,7 +271,7 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
                                   groupedFruits !== null &&
                                   groupedFruits[group].map((fruit, index) => (
                                     <tr
-                                      key={index}
+                                      key={index + Math.random()}
                                       className="bg-white border dark:bg-gray-800 dark:border-gray-700"
                                     >
                                       <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -295,7 +295,7 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
                             ))
                           : fruits.map((fruit, index) => (
                               <tr
-                                key={index}
+                                key={index + Math.random()}
                                 className="bg-white border dark:bg-gray-800 dark:border-gray-700"
                               >
                                 <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -326,7 +326,7 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
                     <ul className="jar-height space-y-4 rounded-lg border-solid border-8 border-t-0 border-gray-400 bg-white p-4 mt-16 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6">
                       {cart.map((fruit) => (
                         <li
-                          key={fruit.name}
+                          key={fruit.name + Math.random()}
                           className="mb-4 flex align-middle justify-between"
                         >
                           <span>

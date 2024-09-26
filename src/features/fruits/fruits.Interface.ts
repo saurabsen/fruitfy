@@ -1,4 +1,3 @@
-// Define a type for the slice state
 export interface Fruit {
   id: number;
   name: string;
@@ -14,14 +13,12 @@ export interface Fruit {
   };
 }
 
-// Define the state interface for fruits
 export interface FruitsState {
   fruits: Fruit[];
   loading: boolean;
   error: string | null;
 }
 
-// Initial state
 export const initialState: FruitsState = {
   fruits: [],
   loading: false,
