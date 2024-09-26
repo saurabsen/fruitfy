@@ -5,6 +5,8 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { ChevronDown, ChevronRight, Trash2 } from "lucide-react";
 import { getRandomColor, groupBy } from "utils/helper";
 import { Fruit, FruitListProps } from "interface/Fruits";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
@@ -13,6 +15,10 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
 
   const addToCart = (fruit: Fruit) => {
     setCart((prevCart) => [...prevCart, fruit]);
+    toast.success(`Fruit added to the Jar.`, {
+      position: "top-center",
+      autoClose: 3000,
+    });
   };
 
   const removeFromCart = (fruitName: string) => {
@@ -22,6 +28,10 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
       newCart.splice(fruitIndex, 1);
       setCart(newCart);
     }
+    toast.success(`Fruit removed from the Jar.`, {
+      position: "top-center",
+      autoClose: 3000,
+    });
   };
 
   const getFruitImagePath = (fruitName: string): string | null => {
@@ -101,6 +111,7 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
 
   return (
     <div id="fruit">
+      <ToastContainer position="top-center" autoClose={3000} />
       <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
         <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
