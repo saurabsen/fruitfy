@@ -151,7 +151,7 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
                     {Array.isArray(fruits) && fruits.length > 0 ? (
                       fruits.map((fruit) => (
                         <div
-                          key={fruit.name + Math.random()}
+                          key={fruit.name}
                           className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6"
                         >
                           <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
