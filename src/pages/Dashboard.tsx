@@ -3,7 +3,6 @@ import FruitList from "components/FruitList/FruitList";
 import { useAppDispatch, useAppSelector } from "utils/hooks";
 import { fetchFruits } from "features/fruits/fruitsSlice";
 import Hero from "components/Hero/Hero";
-import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const dispatch = useAppDispatch();

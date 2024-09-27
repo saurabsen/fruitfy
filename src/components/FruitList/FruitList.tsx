@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
-  const [cart, setCart] = useState<Fruit[]>([]);
+  const [jar, setJar] = useState<Fruit[]>([]);
   const [activeTab, setActiveTab] = useState<boolean>(true);
   const [groupByField, setGroupByField] = useState<string>("None");
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>(
@@ -19,7 +19,7 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
   let groupedFruits: Record<string, Fruit[]> | null = null;
 
   const addToCart = (fruit: Fruit) => {
-    setCart((prevCart) => [...prevCart, fruit]);
+    setJar((prevJar) => [...prevJar, fruit]);
     toast.success(`${fruit.name} added to the Jar.`, {
       position: "top-center",
       autoClose: 3000,
@@ -27,11 +27,11 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
   };
 
   const removeFromCart = (fruitName: string) => {
-    const fruitIndex = cart.findIndex((fruit) => fruit.name === fruitName);
+    const fruitIndex = jar.findIndex((fruit) => fruit.name === fruitName);
     if (fruitIndex !== -1) {
-      const newCart = [...cart];
+      const newCart = [...jar];
       newCart.splice(fruitIndex, 1);
-      setCart(newCart);
+      setJar(newCart);
     }
     toast.success(`${fruitName} removed from the Jar.`, {
       position: "top-center",
@@ -46,13 +46,13 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
     return fruit ? fruit.imagePath : null;
   };
 
-  const totalCalories = cart.reduce(
+  const totalCalories = jar.reduce(
     (total, fruit) => total + fruit.nutritions.calories,
     0
   );
 
-  const backgroundColor = cart.map(() => getRandomColor());
-  const hoverBackgroundColor = cart.map(() => getRandomColor());
+  const backgroundColor = jar.map(() => getRandomColor());
+  const hoverBackgroundColor = jar.map(() => getRandomColor());
 
   const aggregateFruitsByCalories = (fruits: Fruit[]): Fruit[] => {
     const fruitMap: { [key: string]: Fruit } = {};
@@ -75,11 +75,11 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
   };
 
   const pieData = {
-    labels: aggregateFruitsByCalories(cart).map((fruit) => fruit.name),
+    labels: aggregateFruitsByCalories(jar).map((fruit) => fruit.name),
     datasets: [
       {
         label: "Calories",
-        data: aggregateFruitsByCalories(cart).map(
+        data: aggregateFruitsByCalories(jar).map(
           (fruit) => fruit.nutritions.calories
         ),
         backgroundColor,
@@ -105,7 +105,7 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
   }
 
   const addGroupToJar = (groupFruits: Fruit[]) => {
-    setCart((prevJar) => [...prevJar, ...groupFruits]);
+    setJar((prevJar) => [...prevJar, ...groupFruits]);
   };
 
   return (
@@ -320,10 +320,10 @@ const FruitList: React.FC<FruitListProps> = ({ fruits }) => {
                   Jar
                 </p>
 
-                {cart.length > 0 ? (
+                {jar.length > 0 ? (
                   <>
                     <ul className="jar-height space-y-4 rounded-lg border-solid border-8 border-t-0 border-gray-400 bg-white p-4 mt-16 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6">
-                      {cart.map((fruit) => (
+                      {jar.map((fruit) => (
                         <li
                           key={fruit.name + Math.random()}
                           className="mb-4 flex align-middle justify-between"
